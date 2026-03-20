@@ -249,36 +249,63 @@
 
   /* ---- PRINT ---- */
   @media print {
-    @page { size: letter portrait; margin: 0.4in; }
+    @page { size: letter portrait; margin: 0.45in; }
 
     body { background: white; padding: 0; display: block; }
     .toolbar { display: none !important; }
-    .page { box-shadow: none; border: 1.5px solid #29abe2; max-width: 100%; width: 100%; }
 
-    /* Tighten everything up for print */
-    .sec-header { padding: 4px 10px; font-size: 10px; }
-    .meta-row { padding: 5px 10px; }
-    .fld { padding: 4px 8px; }
-    .fld label { font-size: 7px; }
-    .fld input, .fld select, .fld textarea { font-size: 10px !important; min-height: 18px; padding: 1px 0; }
-    .meta-item input { font-size: 11px !important; min-height: 20px; }
-    .note-box { padding: 5px 10px; font-size: 9px; }
-    .sig-panel { padding: 8px 10px; }
-    .sig-panel-title { padding: 4px 10px; font-size: 9px; margin: -8px -10px 8px; }
-    .sig-canvas-wrap { height: 60px; }
-    .sig-date-row input { font-size: 10px !important; min-height: 20px; }
-    .sig-label { font-size: 7px; }
-    .checkbox-row { padding-top: 2px; gap: 8px; }
-    .cb-opt span { font-size: 10px; }
-    .cb-opt input[type="checkbox"] { width: 12px; height: 12px; min-height: 12px; }
-    .page-footer { height: 4px; }
-
-    .sig-canvas-wrap canvas, .sec-header, .sig-panel-title, .page-footer, .doc-header, .note-box {
-      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    /* Reset mobile layout — force full PC grid for print */
+    .page {
+      box-shadow: none !important;
+      border: 2px solid #29abe2 !important;
+      max-width: 100% !important; width: 100% !important;
+      margin: 0 !important;
     }
-    .sig-clear { display: none !important; }
 
-    .fld input[readonly], .fld.pre-fill input { color: #555 !important; }
+    /* Force all grids back to multi-column (undo mobile stacking) */
+    .fg-2   { grid-template-columns: 1fr 1fr !important; }
+    .fg-3   { grid-template-columns: 1fr 1fr 1fr !important; }
+    .fg-city { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
+    .meta-row { grid-template-columns: 1fr 1fr !important; }
+    .sig-grid { grid-template-columns: 1fr 1fr !important; }
+    .sig-panel { border-right: 1px solid var(--border) !important; border-bottom: none !important; }
+    .sig-panel:last-child { border-right: none !important; }
+
+    /* Compact sizes */
+    .doc-header img { max-height: 70px; object-fit: contain; }
+    .meta-row { padding: 5px 12px; }
+    .meta-label { font-size: 10px; }
+    .meta-item input { font-size: 11px !important; min-height: 20px !important; }
+    .sec-header { padding: 5px 12px; font-size: 10px; letter-spacing: 1px; }
+    .fld { padding: 5px 10px; }
+    .fld label { font-size: 7px; letter-spacing: 1px; }
+    .fld input, .fld select, .fld textarea {
+      font-size: 10px !important; min-height: 16px !important;
+      padding: 1px 0 !important; border-bottom: 1px solid #ccc !important;
+      background: white !important;
+    }
+    .fld.pre-fill { background: #f5f5f5 !important; }
+    .fld.pre-fill input { color: #666 !important; }
+    .note-box { padding: 5px 12px; font-size: 9px; }
+    .checkbox-row { padding-top: 3px; gap: 10px; }
+    .cb-opt span { font-size: 10px; }
+    .cb-opt input[type="checkbox"] { width: 11px; height: 11px; min-height: 11px; }
+    .sig-panel { padding: 8px 12px; }
+    .sig-panel-title { padding: 4px 12px; font-size: 9px; margin: -8px -12px 8px; }
+    .sig-date-row { margin-bottom: 6px; }
+    .sig-date-row label { font-size: 9px; }
+    .sig-date-row input { font-size: 10px !important; min-height: 18px !important; border-bottom: 1px solid #ccc !important; background: white !important; }
+    .sig-label { font-size: 7px; }
+    .sig-canvas-wrap { height: 55px; }
+    .sig-clear { display: none !important; }
+    .page-footer { height: 5px; }
+
+    /* Color-accurate backgrounds */
+    .sec-header, .sig-panel-title, .page-footer, .doc-header, .note-box,
+    .sig-canvas-wrap canvas {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
   }
 </style>
 </head>
